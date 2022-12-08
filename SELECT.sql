@@ -21,8 +21,13 @@ join authorsalbums on musicians.id = authorsalbums.musicians_id
 join albums on authorsalbums.albums_id = albums.id
 where (albums.exityear = 2020))
 
-select collections.name from collections
-where name like '%Eminem%'
+select distinct collections.name from collections
+join collectionstracks on collections.id = collectionstracks.collections_id
+join tracks on tracks.id = collectionstracks.tracks_id 
+join albums on albums.id = tracks.albums_id
+join authorsalbums on albums.id = authorsalbums.albums_id 
+join musicians on musicians.id = authorsalbums.musicians_id
+where musicians.name like '%Eminem%'
 
 select albums.name from musicians 
 join musiciansgenres on musicians.id = musiciansgenres.musicians_id
